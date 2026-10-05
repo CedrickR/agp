@@ -56,12 +56,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = $_POST['action'] ?? '';
 
     switch ($action) {
-        case 'prompt':
-            $prompt = trim((string) ($_POST['prompt'] ?? ''));
-            update_data(function (array &$d) use ($prompt) { $d['prompt'] = $prompt; });
-            flash('success', 'Prompt enregistré.');
-            break;
-
         case 'upload':
             $file  = $_FILES['image'] ?? null;
             $title = trim((string) ($_POST['title'] ?? ''));
@@ -187,14 +181,6 @@ page_header('Administration');
         <div class="admin_grid">
           <!-- Colonne gauche : contenu du concours -->
           <div class="admin_col">
-            <form method="post" class="card_component">
-              <h2 class="heading-style-h5">Prompt</h2>
-              <input type="hidden" name="csrf" value="<?= $csrf ?>">
-              <input type="hidden" name="action" value="prompt">
-              <textarea class="form_input is-textarea" name="prompt" rows="3" placeholder="Le prompt utilisé pour générer les images"><?= e($data['prompt']) ?></textarea>
-              <button type="submit" class="button is-small">Enregistrer</button>
-            </form>
-
             <div class="card_component">
               <h2 class="heading-style-h5">Images (<?= count($data['images']) ?>/<?= MAX_IMAGES ?>)</h2>
 

@@ -12,9 +12,6 @@ page_header('Résultats du vote');
       <div class="padding-section-small text-align-center">
         <span class="tag">Résultats</span>
         <h1 class="heading-style-h1">Le verdict</h1>
-        <?php if ($data['prompt'] !== ''): ?>
-          <p class="text-size-medium text-color-muted">« <?= e($data['prompt']) ?> »</p>
-        <?php endif; ?>
       </div>
 
       <div class="padding-bottom padding-large">

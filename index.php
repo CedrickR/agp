@@ -40,20 +40,14 @@ $data   = load_data();
 $voted  = has_voted($data);
 $isOpen = $data['status'] === 'open';
 
-page_header('Vote — Élis la meilleure image');
+page_header('Votez pour l\'image réalisée par l\'atelier d\'architecte de la Caf');
 ?>
 <section class="section_hero">
   <div class="padding-global">
     <div class="container-medium">
       <div class="padding-section-small text-align-center">
         <span class="tag">Concours d'images IA</span>
-        <h1 class="heading-style-h1">Élis la meilleure image</h1>
-        <?php if ($data['prompt'] !== ''): ?>
-          <div class="hero_prompt">
-            <span class="hero_prompt-label">Prompt</span>
-            <p class="text-size-medium">« <?= e($data['prompt']) ?> »</p>
-          </div>
-        <?php endif; ?>
+        <h1 class="heading-style-h1">Votez pour l'image qui, selon vous, a été réalisée par l'atelier d'architecte de la Caf.</h1>
         <p class="text-size-regular text-color-muted">Un seul vote par personne. Choisis bien&nbsp;!</p>
       </div>
     </div>

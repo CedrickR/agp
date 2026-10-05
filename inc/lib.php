@@ -6,7 +6,6 @@ session_start();
 function default_data(): array
 {
     return [
-        'prompt' => '',
         'status' => 'open', // open | closed
         'images' => [],
         'voters' => [],
