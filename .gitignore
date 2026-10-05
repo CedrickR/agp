@@ -1,0 +1,4 @@
+data/data.json
+uploads/*
+!uploads/.htaccess
+!uploads/.gitkeep
