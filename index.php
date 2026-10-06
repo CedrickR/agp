@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         foreach ($data['images'] as &$img) {
             if ($img['id'] === $imageId) {
                 $img['votes']++;
-                foreach (voter_keys() as $k) {
+                foreach (voter_keys($data) as $k) {
                     $data['voters'][$k] = time();
                 }
                 return 'ok';

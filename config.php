@@ -5,7 +5,8 @@ const ADMIN_PASSWORD = 'changeme';
 // Nombre maximum d'images en compétition
 const MAX_IMAGES = 5;
 
-// Bloquer aussi le vote par adresse IP (en plus du cookie).
+// Valeur initiale du blocage du vote par adresse IP (en plus du cookie),
+// ensuite activable / désactivable depuis l'admin.
 // Attention : sur un réseau partagé (bureau, wifi public), une seule personne pourra voter.
 const VOTE_CHECK_IP = false;
 

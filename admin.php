@@ -137,6 +137,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             flash('success', $action === 'open' ? 'Vote ouvert.' : 'Vote clôturé, résultats publiés.');
             break;
 
+        case 'toggle_ip':
+            $on = update_data(function (array &$d) { return $d['check_ip'] = empty($d['check_ip']); });
+            flash('success', $on ? 'Blocage par adresse IP activé.' : 'Blocage par adresse IP désactivé.');
+            break;
+
         case 'reset':
             update_data(function (array &$d) {
                 foreach ($d['images'] as &$img) {
@@ -154,6 +159,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $data   = load_data();
 $total  = total_votes($data);
 $isOpen = $data['status'] === 'open';
+$checkIp = !empty($data['check_ip']);
 $csrf   = e(csrf_token());
 
 page_header('Administration');
@@ -238,6 +244,19 @@ page_header('Administration');
                   <input type="hidden" name="csrf" value="<?= $csrf ?>">
                   <input type="hidden" name="action" value="reset">
                   <button type="submit" class="button is-danger">Réinitialiser les votes</button>
+                </form>
+              </div>
+              <div class="admin_option">
+                <div>
+                  <p class="text-weight-medium">Blocage par adresse IP :
+                    <span class="status-badge <?= $checkIp ? 'is-open' : 'is-closed' ?>"><?= $checkIp ? 'Activé' : 'Désactivé' ?></span>
+                  </p>
+                  <p class="text-size-small text-color-muted">Activé, une seule personne peut voter par connexion internet (bureau, wifi partagé…).</p>
+                </div>
+                <form method="post">
+                  <input type="hidden" name="csrf" value="<?= $csrf ?>">
+                  <input type="hidden" name="action" value="toggle_ip">
+                  <button type="submit" class="button is-secondary is-small"><?= $checkIp ? 'Désactiver' : 'Activer' ?></button>
                 </form>
               </div>
             </div>

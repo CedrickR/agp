@@ -311,3 +311,8 @@ h1, h2, h3, h4, h5, p { margin: 0; }
   .header_nav { gap: 1rem; }
   .vote_actions .button { width: 100%; }
 }
+
+/* Option blocage IP (admin) */
+.admin_option { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-top: 1rem; margin-top: .25rem; border-top: 1px solid var(--color-border); }
+.text-weight-medium { font-weight: 500; }
+@media (max-width: 479px) { .admin_option { flex-direction: column; align-items: flex-start; } }

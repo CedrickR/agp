@@ -7,6 +7,7 @@ function default_data(): array
 {
     return [
         'status' => 'open', // open | closed
+        'check_ip' => VOTE_CHECK_IP, // blocage par adresse IP, modifiable dans l'admin
         'images' => [],
         'voters' => [],
     ];
@@ -75,13 +76,13 @@ function check_csrf(): void
 }
 
 /** Empreintes identifiant le votant (cookie + IP optionnelle) */
-function voter_keys(): array
+function voter_keys(array $data): array
 {
     $keys = [];
     if (!empty($_COOKIE['voter_id']) && preg_match('/^[a-f0-9]{32}$/', $_COOKIE['voter_id'])) {
         $keys[] = 'c:' . hash('sha256', $_COOKIE['voter_id']);
     }
-    if (VOTE_CHECK_IP) {
+    if (!empty($data['check_ip'])) {
         $keys[] = 'i:' . hash('sha256', ($_SERVER['REMOTE_ADDR'] ?? '') . '|' . __DIR__);
     }
     return $keys;
@@ -104,7 +105,7 @@ function ensure_voter_cookie(): void
 
 function has_voted(array $data): bool
 {
-    foreach (voter_keys() as $k) {
+    foreach (voter_keys($data) as $k) {
         if (isset($data['voters'][$k])) {
             return true;
         }
